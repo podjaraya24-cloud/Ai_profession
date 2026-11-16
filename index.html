@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Інформатика 10 клас | ІТ-професії та Штучний інтелект</title>
+    <style>
+        :root {
+            --bg-main: #f4f7fb;
+            --bg-card: #ffffff;
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #0f172a;
+            --accent: #7c3aed;
+            --success: #16a34a;
+            --warning: #d97706;
+            --danger: #dc2626;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 4px 15px rgba(15, 23, 42, 0.06);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.65;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 60%, #4c1d95 100%);
+            color: white;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        header .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            padding: 0.3rem 0.9rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.75rem;
+            border: 1px solid rgba(255,255,255,0.25);
+        }
+
+        header h1 {
+            font-size: 1.9rem;
+            margin-bottom: 0.4rem;
+        }
+
+        header p {
+            color: #cbd5e1;
+            max-width: 750px;
+            margin: 0 auto;
+            font-size: 1rem;
+        }
+
+        .nav-bar {
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            padding: 0.9rem 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+        }
+
+        .nav-btn {
+            background: #f1f5f9;
+            color: var(--secondary);
+            border: 2px solid transparent;
+            padding: 0.65rem 1.3rem;
+            border-radius: 10px;
+            font-size: 0.98rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-btn:hover {
+            background: #e2e8f0;
+        }
+
+        .nav-btn.active {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        .nav-btn.theory-toggle {
+            background: #ede9fe;
+            color: var(--accent);
+            border-color: #c4b5fd;
+        }
+
+        .nav-btn.theory-toggle.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .container {
+            max-width: 1120px;
+            margin: 2rem auto;
+            padding: 0 1.25rem 3rem;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Theory Drawer / Panel */
+        .theory-tabs {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .theory-tab-btn {
+            padding: 0.75rem 1.4rem;
+            border: 2px solid var(--border);
+            background: var(--bg-card);
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            color: var(--text-main);
+            transition: 0.2s;
+        }
+
+        .theory-tab-btn.active {
+            border-color: var(--primary);
+            background: #eff6ff;
+            color: var(--primary-dark);
+        }
+
+        .lesson-content {
+            display: none;
+        }
+
+        .lesson-content.active {
+            display: block;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 1.75rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .card h2 {
+            color: var(--secondary);
+            font-size: 1.45rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.6rem;
+            border-bottom: 2px solid #eff6ff;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .card h3 {
+            color: var(--primary-dark);
+            font-size: 1.15rem;
+            margin: 1.25rem 0 0.6rem;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.25rem;
+            margin-top: 1rem;
+        }
+
+        .role-box {
+            background: #f8fafc;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.2rem;
+            border-radius: 8px;
+        }
+
+        .role-box.nontech {
+            border-left-color: var(--accent);
+        }
+
+        .role-box h4 {
+            font-size: 1.05rem;
+            color: var(--secondary);
+            margin-bottom: 0.35rem;
+        }
+
+        .stack-tag {
+            display: inline-block;
+            background: #e0e7ff;
+            color: #3730a3;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.2rem 0.55rem;
+            border-radius: 6px;
+            margin-top: 0.4rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            border: 1px solid var(--border);
+            padding: 0.8rem 1rem;
+            text-align: left;
+        }
+
+        th {
+            background: #1e293b;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        .grades-flow {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .grade-step {
+            flex: 1 1 180px;
+            background: linear-gradient(180deg, #eff6ff 0%, #ffffff 100%);
+            border: 1px solid #bfdbfe;
+            border-radius: 10px;
+            padding: 1rem;
+        }
+
+        .grade-step strong {
+            display: block;
+            color: var(--primary-dark);
+            font-size: 1.05rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .ai-hierarchy {
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+            margin: 1rem 0;
+        }
+
+        .ai-layer {
+            padding: 1rem 1.25rem;
+            border-radius: 10px;
+            border-left: 5px solid;
+        }
+
+        .ai-layer.l1 { background: #eff6ff; border-color: #2563eb; }
+        .ai-layer.l2 { background: #f5f3ff; border-color: #7c3aed; margin-left: 1.2rem; }
+        .ai-layer.l3 { background: #fdf4ff; border-color: #c026d3; margin-left: 2.4rem; }
+        .ai-layer.l4 { background: #ecfdf5; border-color: #059669; margin-left: 3.6rem; }
+
+        .warning-box {
+            background: #fffbeb;
+            border: 1px solid #fde68a;
+            border-left: 5px solid var(--warning);
+            padding: 1rem 1.25rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        /* Simulator Styles */
+        .sim-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .sim-stats {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-pill {
+            background: #f1f5f9;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .sim-mode-switch {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.25rem;
+            flex-wrap: wrap;
+        }
+
+        .sim-scenario-card {
+            background: #f8fafc;
+            border: 2px solid #cbd5e1;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .scenario-tag {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 0.25rem 0.7rem;
+            border-radius: 6px;
+            margin-bottom: 0.6rem;
+        }
+
+        .sim-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 0.85rem;
+            margin-top: 1rem;
+        }
+
+        .sim-opt-btn {
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            padding: 0.95rem 1rem;
+            text-align: left;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .sim-opt-btn:hover:not(:disabled) {
+            border-color: var(--primary);
+            background: #eff6ff;
+        }
+
+        .sim-opt-btn.correct {
+            border-color: var(--success);
+            background: #dcfce7;
+            color: #14532d;
+        }
+
+        .sim-opt-btn.wrong {
+            border-color: var(--danger);
+            background: #fee2e2;
+            color: #7f1d1d;
+        }
+
+        .feedback-box {
+            margin-top: 1rem;
+            padding: 1rem 1.25rem;
+            border-radius: 10px;
+            display: none;
+            font-size: 0.95rem;
+        }
+
+        .feedback-box.show {
+            display: block;
+        }
+
+        .feedback-box.ok {
+            background: #dcfce7;
+            border-left: 5px solid var(--success);
+            color: #14532d;
+        }
+
+        .feedback-box.err {
+            background: #fee2e2;
+            border-left: 5px solid var(--danger);
+            color: #7f1d1d;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 1rem;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Quiz Styles */
+        .quiz-progress {
+            height: 10px;
+            background: #e2e8f0;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        .quiz-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .question-card {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.4rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .q-title {
+            font-weight: 700;
+            font-size: 1.05rem;
+            margin-bottom: 0.9rem;
+            color: var(--secondary);
+        }
+
+        .q-topic {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 0.3rem;
+            display: block;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.65rem;
+            padding: 0.65rem 0.9rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: 0.15s;
+        }
+
+        .radio-option:hover {
+            background: #f8fafc;
+            border-color: #94a3b8;
+        }
+
+        .radio-option input {
+            margin-top: 0.25rem;
+        }
+
+        .radio-option.ans-correct {
+            background: #dcfce7;
+            border-color: var(--success);
+            font-weight: 600;
+        }
+
+        .radio-option.ans-wrong {
+            background: #fee2e2;
+            border-color: var(--danger);
+        }
+
+        .result-banner {
+            display: none;
+            background: linear-gradient(135deg, #1e3a8a, #4c1d95);
+            color: white;
+            padding: 2rem;
+            border-radius: 14px;
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .result-banner.show {
+            display: block;
+        }
+
+        .score-big {
+            font-size: 2.6rem;
+            font-weight: 800;
+            margin: 0.5rem 0;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            padding: 1.5rem;
+            border-top: 1px solid var(--border);
+            background: white;
+        }
+
+        @media (max-width: 640px) {
+            .ai-layer.l2, .ai-layer.l3, .ai-layer.l4 { margin-left: 0.5rem; }
+            header h1 { font-size: 1.45rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="badge">Інформатика • 10 клас • Інтерактивний модуль</div>
+    <h1>ІТ-професії та Штучний інтелект: кар'єра майбутнього</h1>
+    <p>Навчальний комплекс за двома темами: «Професії та ролі фахівців у сфері ІТ» та «Розвиток штучного інтелекту та вплив на майбутні професії»</p>
+</header>
+
+<nav class="nav-bar">
+    <button class="nav-btn theory-toggle active" onclick="switchMainTab('theory', this)">📖 Теоретичний довідник</button>
+    <button class="nav-btn" onclick="switchMainTab('simulator', this)">🎮 Інтерактивний симулятор</button>
+    <button class="nav-btn" onclick="switchMainTab('quiz', this)">📝 Тестування (12 запитань)</button>
+</nav>
+
+<main class="container">
+
+    <!-- ==================== СЕКЦІЯ 1: ТЕОРІЯ ==================== -->
+    <section id="theory" class="section active">
+        <div class="theory-tabs">
+            <button class="theory-tab-btn active" onclick="switchLesson(1, this)">Урок 1. Професії та ролі фахівців у сфері ІТ</button>
+            <button class="theory-tab-btn" onclick="switchLesson(2, this)">Урок 2. Розвиток ШІ та вплив на професії майбутнього</button>
+        </div>
+
+        <!-- УРОК 1 -->
+        <div id="lesson-1" class="lesson-content active">
+            <div class="card">
+                <h2>🔄 Життєвий цикл розробки ПЗ (SDLC) та поділ ролей</h2>
+                <p>Створення сучасного цифрового продукту — це командний процес, що відбувається за етапами <strong>SDLC (Software Development Life Cycle)</strong>: <em>Аналіз вимог → Проєктування та дизайн → Розробка коду → Тестування → Розгортання (реліз) → Підтримка та оновлення</em>. Усіх фахівців поділяють на <strong>технічні (Tech)</strong> та <strong>нетехнічні (Non-Tech)</strong> ролі.</p>
+            </div>
+
+            <div class="card">
+                <h2>1. Аналітика, проєктування та дизайн («Що і для кого створюємо?»)</h2>
+                <div class="grid-2">
+                    <div class="role-box">
+                        <h4>Business Analyst (BA / Бізнес-аналітик)</h4>
+                        <p>Посередник між замовником (бізнесом) і командою розробки. Збирає вимоги, аналізує ринок, описує бізнес-процеси та формує технічне завдання (ТЗ).</p>
+                    </div>
+                    <div class="role-box">
+                        <h4>System Analyst (SA / Системний аналітик)</h4>
+                        <p>Проєктує внутрішню технічну логіку системи: як взаємодіють модулі, які бази даних, протоколи та API застосовуються.</p>
+                    </div>
+                    <div class="role-box">
+                        <h4>UX Designer (User Experience)</h4>
+                        <p>Проєктує логіку взаємодії користувача з продуктом. Створює прототипи (wireframes), продумує шлях користувача (User Flow) для зручності навігації.</p>
+                    </div>
+                    <div class="role-box">
+                        <h4>UI Designer (User Interface)</h4>
+                        <p>Відповідає за візуальне оформлення: палітру кольорів, шрифти (типографіку), іконки, анімації та адаптивність макетів під різні екрани.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>2. Розробка програмного забезпечення («Як це працює?»)</h2>
+                <div class="grid-2">
+                    <div class="role-box">
+                        <h4>Frontend Developer</h4>
+                        <p>Створює клієнтську частину вебзастосунку — усе, що користувач бачить у браузері та з чим взаємодіє (кнопки, форми, інтерфейс).</p>
+                        <span class="stack-tag">HTML, CSS, JavaScript, React, Angular, Vue.js</span>
+                    </div>
+                    <div class="role-box">
+                        <h4>Backend Developer</h4>
+                        <p>Розробляє серверну частину («під капотом»): бізнес-логіку, роботу з базами даних, автентифікацію, безпеку та API.</p>
+                        <span class="stack-tag">Python, Java, C#, Node.js, Go, SQL/NoSQL</span>
+                    </div>
+                    <div class="role-box">
+                        <h4>Full-stack Developer</h4>
+                        <p>Універсальний розробник, який володіє технологіями як клієнтської (Frontend), так і серверної (Backend) розробки.</p>
+                    </div>
+                    <div class="role-box">
+                        <h4>Mobile Developer</h4>
+                        <p>Створює мобільні застосунки під iOS, Android або кросплатформні рішення.</p>
+                        <span class="stack-tag">Swift (iOS), Kotlin/Java (Android), Flutter, React Native</span>
+                    </div>
+                    <div class="role-box">
+                        <h4>Game Developer (GameDev)</h4>
+                        <p>Розробляє відеоігри, працюючи з ігровою фізикою, 3D-графікою, рушіями та поведінкою персонажів.</p>
+                        <span class="stack-tag">Unity (C#), Unreal Engine (C++)</span>
+                    </div>
+                    <div class="role-box">
+                        <h4>Embedded Developer</h4>
+                        <p>Програмує вбудовані системи та мікроконтролери: дрони, розумні будинки, медичні прилади, електроніку авто.</p>
+                        <span class="stack-tag">C, C++, Assembly, мікроконтролери</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>3. Якість, безпека, інфраструктура та робота з даними</h2>
+                <div class="grid-2">
+                    <div class="role-box">
+                        <h4>QA Engineer (Quality Assurance)</h4>
+                        <p>Контролює якість продукту, знаходить та документує помилки (баги). Поділяється на <strong>Manual QA</strong> (ручне тестування за сценаріями) та <strong>Automation QA</strong> (написання автотестів).</p>
+                    </div>
+                    <div class="role-box">
+                        <h4>Cybersecurity Specialist</h4>
+                        <p>Захищає системи від кібератак. Включає <strong>Pentester</strong> (етичний хакер, що шукає вразливості) та <strong>Security Analyst</strong> (моніторинг інцидентів безпеки).</p>
+                    </div>
+                    <div class="role-box">
+                        <h4>DevOps Engineer</h4>
+                        <p>Поєднує розробку та адміністрування: автоматизує збірку та розгортання коду на серверах (CI/CD), керує хмарною інфраструктурою (AWS, Azure, Google Cloud).</p>
+                    </div>
+                    <div class="role-box">
+                        <h4>Data Analyst та Data Scientist / ML Engineer</h4>
+                        <p><strong>Data Analyst</strong> збирає та візуалізує метрики для бізнес-рішень. <strong>Data Scientist / ML Engineer</strong> створює моделі машинного навчання та нейромережі для прогнозування.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>4. Управління продуктом, проєктами та командою (Non-Tech ролі)</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Критерій порівняння</th>
+                            <th>Project Manager (PM)</th>
+                            <th>Product Manager (PdM)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Головне питання</strong></td>
+                            <td><em>Як</em> і <em>коли</em> ми це зробимо?</td>
+                            <td><em>Що</em> саме і <em>навіщо</em> ми створюємо?</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Фокус уваги</strong></td>
+                            <td>Процеси всередині команди, дедлайни, бюджет, розподіл задач.</td>
+                            <td>Цінність для користувача, ринок, конкуренти, прибутковість.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Критерій успіху</strong></td>
+                            <td>Проєкт зданий вчасно, у межах бюджету та за ТЗ.</td>
+                            <td>Продукт популярний серед користувачів і приносить дохід.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="grid-2">
+                    <div class="role-box nontech">
+                        <h4>Scrum Master</h4>
+                        <p>Фасилітатор у гнучких командах (Agile/Scrum): допомагає дотримуватися принципів командної роботи, проводить зустрічі (спринти) та усуває організаційні перешкоди.</p>
+                    </div>
+                    <div class="role-box nontech">
+                        <h4>IT Recruiter та HR Manager</h4>
+                        <p><strong>Recruiter</strong> шукає та проводить співбесіди з кандидатами на вакансії. <strong>HR</strong> відповідає за адаптацію, навчання, мотивацію та мікроклімат у колективі.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>5. Матриця компетенцій та система грейдів (кар'єрний шлях)</h2>
+                <p><strong>Hard Skills</strong> — вимірювані технічні навички (мови програмування, фреймворки, англійська мова).<br>
+                <strong>Soft Skills</strong> — особистісні та комунікативні якості (робота в команді, критичне мислення, емоційний інтелект, тайм-менеджмент).</p>
+                <div class="grades-flow">
+                    <div class="grade-step">
+                        <strong>1. Trainee (Стажер)</strong>
+                        Базова теорія без комерційного досвіду; працює під наглядом ментора.
+                    </div>
+                    <div class="grade-step">
+                        <strong>2. Junior</strong>
+                        Виконує типові задачі за чітким ТЗ під контролем старших колег.
+                    </div>
+                    <div class="grade-step">
+                        <strong>3. Middle</strong>
+                        Самостійний фахівець, відповідає за окремий модуль продукту.
+                    </div>
+                    <div class="grade-step">
+                        <strong>4. Senior</strong>
+                        Експерт, проєктує архітектуру, оптимізує складні рішення, навчає команду.
+                    </div>
+                    <div class="grade-step">
+                        <strong>5. Tech / Team Lead</strong>
+                        Tech Lead керує технічною архітектурою; Team Lead — людьми та процесами команди.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- УРОК 2 -->
+        <div id="lesson-2" class="lesson-content">
+            <div class="card">
+                <h2>🧠 Ієрархія понять: AI → ML → Deep Learning → Generative AI</h2>
+                <p>Технології штучного інтелекту вкладаються одна в одну за принципом «матрьошки»:</p>
+                <div class="ai-hierarchy">
+                    <div class="ai-layer l1">
+                        <strong>1. Штучний інтелект (Artificial Intelligence, AI)</strong> — найширша галузь створення систем, здатних імітувати когнітивні функції людини (логіку, планування, розпізнавання).
+                    </div>
+                    <div class="ai-layer l2">
+                        <strong>2. Машинне навчання (Machine Learning, ML)</strong> — підрозділ AI, де алгоритми не отримують жорстких правил, а <em>самостійно виявляють закономірності</em> у великих масивах даних (датасетах).
+                    </div>
+                    <div class="ai-layer l3">
+                        <strong>3. Глибоке навчання (Deep Learning, DL)</strong> — підрозділ ML на основі багатошарових штучних нейронних мереж для аналізу зображень, звуку, відео та мови.
+                    </div>
+                    <div class="ai-layer l4">
+                        <strong>4. Генеративний ШІ (Generative AI)</strong> — моделі (LLM, дифузійні моделі), здатні створювати <em>новий унікальний контент</em>: тексти, програмний код, зображення, музику та відео.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>📊 Класифікація ШІ за рівнем можливостей</h2>
+                <div class="grid-2">
+                    <div class="role-box">
+                        <h4>ANI (Вузький / слабкий ШІ)</h4>
+                        <p>Єдиний реально існуючий сьогодні рівень ШІ. Вирішує конкретні спеціалізовані завдання (чат-боти, автопілот, рекомендації, розпізнавання облич), але не має свідомості.</p>
+                    </div>
+                    <div class="role-box nontech">
+                        <h4>AGI (Загальний / сильний ШІ)</h4>
+                        <p>Гіпотетичний рівень ШІ, що дорівнює інтелекту людини та здатний самостійно опановувати будь-які інтелектуальні завдання без вузької спеціалізації.</p>
+                    </div>
+                </div>
+                <div class="role-box" style="margin-top: 1rem; border-left-color: #059669;">
+                    <h4>ASI (Штучний надінтелект)</h4>
+                    <p>Теоретична концепція інтелекту, який у всіх сферах (науці, творчості, стратегії) суттєво перевершує сукупний інтелект усього людства.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>💼 Три сценарії трансформації ринку праці</h2>
+                <div class="grid-2">
+                    <div class="role-box" style="border-left-color: var(--danger);">
+                        <h4>1. Автоматизація (Заміщення рутини)</h4>
+                        <p>Скорочення ролей із шаблонними алгоритмізованими діями: перша лінія кол-центрів, базовий переклад і копірайтинг, рутинне введення даних, базова ретуш.</p>
+                    </div>
+                    <div class="role-box" style="border-left-color: var(--primary);">
+                        <h4>2. Аугментація (Підсилення фахівця)</h4>
+                        <p>ШІ працює як <strong>Copilot («другий пілот»)</strong>: програмісти швидше пишуть код, лікарі перевіряють знімки за допомогою комп'ютерного зору, юристи аналізують договори.</p>
+                    </div>
+                </div>
+                <h3>3. Нові професії епохи ШІ</h3>
+                <div class="grid-2">
+                    <div class="role-box nontech">
+                        <h4>AI Engineer / LLM Developer</h4>
+                        <p>Інтегрує великі мовні моделі в продукти, налаштовує пошук по корпоративних базах знань (RAG-архітектура).</p>
+                    </div>
+                    <div class="role-box nontech">
+                        <h4>AI Ethics & Compliance Officer</h4>
+                        <p>Контролює дотримання авторського права, приватності даних та відсутність дискримінації в роботі алгоритмів.</p>
+                    </div>
+                    <div class="role-box nontech">
+                        <h4>Data Annotator / AI Trainer (RLHF)</h4>
+                        <p>Фахівець, який розмічає навчальні дані та оцінює відповіді моделей, навчаючи ШІ точності та безпечності.</p>
+                    </div>
+                    <div class="role-box nontech">
+                        <h4>AI Workflow Architect / Prompt Engineer</h4>
+                        <p>Проєктує багатокрокові ланцюжки запитів і автономних ШІ-агентів для автоматизації бізнес-процесів.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>⚠️ Ризики, етичні виклики та навички майбутнього</h2>
+                <div class="warning-box">
+                    <strong>Ключові обмеження ШІ:</strong>
+                    <ul style="margin-left: 1.3rem; margin-top: 0.4rem;">
+                        <li><strong>Галюцинації ШІ:</strong> впевнена генерація вигаданих фактів або неіснуючих джерел через статистичну природу прогнозування слів.</li>
+                        <li><strong>Алгоритмічна упередженість (Bias):</strong> відтворення дискримінаційних стереотипів, закладених в історичних навчальних даних.</li>
+                        <li><strong>Проблема «чорної скриньки» (Black Box):</strong> неможливість точно простежити внутрішній ланцюжок міркувань глибокої нейромережі.</li>
+                        <li><strong>Діпфейки та приватність:</strong> загроза шахрайства з підробкою голосу/відео та ризик витоку конфіденційних даних у публічні моделі.</li>
+                    </ul>
+                </div>
+                <h3>Human-centric Skills (Навички, які не замінить алгоритм)</h3>
+                <p style="margin-top: 0.5rem;"><strong>Критичне мислення та фактчекінг</strong> • <strong>Системне мислення та постановка задач</strong> • <strong>Емоційний інтелект (EQ) та емпатія</strong> • <strong>Адаптивність і Lifelong Learning (навчання впродовж життя)</strong> • <strong>Етична та юридична відповідальність за рішення</strong>.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== СЕКЦІЯ 2: СИМУЛЯТОР ==================== -->
+    <section id="simulator" class="section">
+        <div class="card">
+            <div class="sim-header">
+                <div>
+                    <h2>🎮 Симулятор: «ІТ-рекрутер та ШІ-стратег»</h2>
+                    <p style="color: var(--text-muted);">Розв'яжіть 8 практичних кейсів: підберіть правильного фахівця в команду або оберіть оптимальну стратегію роботи зі штучним інтелектом.</p>
+                </div>
+                <div class="sim-stats">
+                    <div class="stat-pill">Кейс: <span id="sim-step">1</span> / 8</div>
+                    <div class="stat-pill" style="color: var(--success);">Бали: <span id="sim-score">0</span></div>
+                </div>
+            </div>
+
+            <div id="sim-container">
+                <div class="sim-scenario-card">
+                    <span class="scenario-tag" id="sim-tag">Урок 1 • Команда розробки</span>
+                    <h3 id="sim-title" style="margin-top: 0.3rem; color: var(--secondary);">Завантаження...</h3>
+                    <p id="sim-desc" style="margin-top: 0.5rem; font-size: 1.02rem;"></p>
+                </div>
+
+                <div class="sim-options" id="sim-options"></div>
+
+                <div class="feedback-box" id="sim-feedback"></div>
+
+                <button class="btn-primary" id="sim-next-btn" style="display: none;" onclick="nextSimCase()">Наступний кейс ➔</button>
+            </div>
+
+            <div id="sim-finish" style="display: none; text-align: center; padding: 2rem 1rem;">
+                <h2 style="justify-content: center; border: none;">🎉 Симуляцію завершено!</h2>
+                <p style="font-size: 1.15rem; margin: 0.75rem 0;">Ваш результат: <strong id="sim-final-score" style="color: var(--primary); font-size: 1.4rem;"></strong> балів із 8 можливих.</p>
+                <p id="sim-verdict" style="max-width: 600px; margin: 0 auto 1.25rem; color: var(--text-muted);"></p>
+                <button class="btn-primary" onclick="restartSim()">Пройти симулятор ще раз</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== СЕКЦІЯ 3: ТЕСТУВАННЯ (12 ЗАПИТАНЬ) ==================== -->
+    <section id="quiz" class="section">
+        <div class="card">
+            <h2>📝 Підсумкове тестування (12 запитань)</h2>
+            <p style="color: var(--text-muted); margin-bottom: 1rem;">Охоплює матеріал обох уроків (6 запитань з теми «ІТ-професії» + 6 запитань з теми «Штучний інтелект»). Оберіть один правильний варіант у кожному питанні.</p>
+
+            <div class="quiz-progress">
+                <div class="quiz-progress-bar" id="quiz-progress-bar"></div>
+            </div>
+
+            <form id="quiz-form"></form>
+
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <button type="button" class="btn-primary" id="submit-quiz-btn" onclick="gradeQuiz()">Завершити тестування та перевірити</button>
+                <button type="button" class="nav-btn" id="reset-quiz-btn" style="display: none; margin-top: 1rem;" onclick="initQuiz()">Скинути та пройти заново</button>
+            </div>
+
+            <div class="result-banner" id="quiz-result">
+                <div>Ваш результат тестування</div>
+                <div class="score-big" id="quiz-score-text">0 / 12</div>
+                <div id="quiz-grade-text" style="font-size: 1.15rem; font-weight: 600;"></div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    Навчальний вебмодуль з інформатики для 10 класу • Готово для публікації на GitHub Pages
+</footer>
+
+<script>
+    // --- НАВІГАЦІЯ ---
+    function switchMainTab(sectionId, btn) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.getElementById(sectionId).classList.add('active');
+
+        document.querySelectorAll('.nav-bar .nav-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+    }
+
+    function switchLesson(lessonNum, btn) {
+        document.querySelectorAll('.lesson-content').forEach(l => l.classList.remove('active'));
+        document.getElementById('lesson-' + lessonNum).classList.add('active');
+
+        document.querySelectorAll('.theory-tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+    }
+
+    // --- ДАНІ СИМУЛЯТОРА ---
+    const simCases = [
+        {
+            tag: "Урок 1 • Кейс 1 (Проєктування продукту)",
+            title: "Замовник хоче створити застосунок для доставки їжі, але має лише загальну ідею",
+            desc: "Потрібно провести інтерв'ю із замовником, дослідити конкурентів, описати бізнес-процеси та скласти структуроване технічне завдання (ТЗ) для команди розробників. Кого наймемо першим?",
+            options: [
+                { text: "Business Analyst (Бізнес-аналітик)", correct: true },
+                { text: "DevOps Engineer", correct: false },
+                { text: "Automation QA Engineer", correct: false },
+                { text: "Frontend Developer", correct: false }
+            ],
+            explanation: "Саме Business Analyst перекладає ідеї та потреби бізнесу на мову чітких вимог і технічного завдання для розробників."
+        },
+        {
+            tag: "Урок 1 • Кейс 2 (Веброзробка)",
+            title: "Кнопка «Оплатити замовлення» не реагує на натискання на мобільних екранах",
+            desc: "Сервер працює коректно, але на смартфонах верстка наїжджає на кнопку, і скрипт у браузері не викликає вікно оплати. Хто має виправити цю проблему?",
+            options: [
+                { text: "Database Administrator", correct: false },
+                { text: "Frontend Developer", correct: true },
+                { text: "Embedded Developer", correct: false },
+                { text: "Scrum Master", correct: false }
+            ],
+            explanation: "Frontend Developer відповідає за клієнтську частину, адаптивну верстку та інтерактивність елементів у браузері користувача."
+        },
+        {
+            tag: "Урок 1 • Кейс 3 (Управління та процеси)",
+            title: "Проєкт відстає від графіка на 2 тижні, а бюджет витрачено на 80%",
+            desc: "Команда добре пише код, але потрібно перерозподілити задачі, узгодити нові терміни із замовником і вкластися у фінансові рамки. Чия це зона відповідальності?",
+            options: [
+                { text: "UI Designer", correct: false },
+                { text: "Pentester", correct: false },
+                { text: "Project Manager (PM)", correct: true },
+                { text: "Data Annotator", correct: false }
+            ],
+            explanation: "Project Manager відповідає за терміни (дедлайни), бюджет, планування ресурсів та своєчасну здачу проєкту."
+        },
+        {
+            tag: "Урок 1 • Кейс 4 (Інфраструктура)",
+            title: "Під час розпродажу на сайт зайшли 50 000 користувачів, і сервери впали",
+            desc: "Потрібно налаштувати автоматичне масштабування хмарних серверів та конвеєр безперервного розгортання оновлень (CI/CD). Який фахівець потрібен?",
+            options: [
+                { text: "Manual QA", correct: false },
+                { text: "DevOps Engineer", correct: true },
+                { text: "UX Designer", correct: false },
+                { text: "IT Recruiter", correct: false }
+            ],
+            explanation: "DevOps Engineer відповідає за хмарну інфраструктуру, автоматизацію CI/CD та стабільну роботу серверів під навантаженням."
+        },
+        {
+            tag: "Урок 2 • Кейс 5 (Технології ШІ)",
+            title: "Банк хоче виявляти шахрайські транзакції за історичними даними клієнтів",
+            desc: "Замість написання тисяч жорстких правил «якщо сума > X, заблокувати», система має сама знайти приховані закономірності в мільйонах операцій. Який підхід застосовано?",
+            options: [
+                { text: "Machine Learning (Машинне навчання)", correct: true },
+                { text: "Традиційне лінійне програмування", correct: false },
+                { text: "Штучний надінтелект (ASI)", correct: false },
+                { text: "Лише UI-проєктування", correct: false }
+            ],
+            explanation: "Machine Learning дозволяє алгоритмам самостійно навчатися на історичних датасетах і виявляти аномалії без ручного програмування кожного правила."
+        },
+        {
+            tag: "Урок 2 • Кейс 6 (Ризики ШІ)",
+            title: "Юрист використав чат-бот для підготовки позову, а суд виявив вигадані закони",
+            desc: "Велика мовна модель впевнено навела номери неіснуючих статей та судових рішень. Як називається це явище в роботі генеративного ШІ?",
+            options: [
+                { text: "Алгоритмічна масштабованість", correct: false },
+                { text: "Галюцинації ШІ (AI Hallucinations)", correct: true },
+                { text: "Кроссплатформна компіляція", correct: false },
+                { text: "Синхронізація баз даних", correct: false }
+            ],
+            explanation: "Галюцинації ШІ виникають через те, що мовна модель статистично підбирає правдоподібне продовження тексту, а не перевіряє фактичну достовірність."
+        },
+        {
+            tag: "Урок 2 • Кейс 7 (Трансформація праці)",
+            title: "Програміст використовує GitHub Copilot для швидкої генерації шаблонних функцій",
+            desc: "ШІ пише 60% рутинного коду, а розробник перевіряє безпеку, проєктує архітектуру та інтегрує модулі. Який сценарій впливу ШІ на професію тут реалізовано?",
+            options: [
+                { text: "Повне зникнення професії", correct: false },
+                { text: "Аугментація (підсилення фахівця)", correct: true },
+                { text: "Проблема чорної скриньки", correct: false },
+                { text: "Діпфейк-атака", correct: false }
+            ],
+            explanation: "Аугментація — це співпраця людини та ШІ як «другого пілота», що підвищує продуктивність фахівця, залишаючи стратегічний контроль за людиною."
+        },
+        {
+            tag: "Урок 2 • Кейс 8 (Нові ролі та етика)",
+            title: "Компанія впроваджує ШІ для скринінгу резюме кандидатів",
+            desc: "Необхідно перевірити, чи не дискримінує алгоритм кандидатів за віком або статтю та чи не порушує він закон про захист персональних даних. Кому доручити цю перевірку?",
+            options: [
+                { text: "Game Developer", correct: false },
+                { text: "AI Ethics & Compliance Officer", correct: true },
+                { text: "Embedded Developer", correct: false },
+                { text: "UI Designer", correct: false }
+            ],
+            explanation: "AI Ethics & Compliance Officer стежить за етичністю, відсутністю алгоритмічної упередженості (bias) та правовою безпекою систем ШІ."
+        }
+    ];
+
+    let currentSimIdx = 0;
+    let simScore = 0;
+    let simAnswered = false;
+
+    function loadSimCase() {
+        simAnswered = false;
+        const c = simCases[currentSimIdx];
+        document.getElementById('sim-step').textContent = currentSimIdx + 1;
+        document.getElementById('sim-tag').textContent = c.tag;
+        document.getElementById('sim-title').textContent = c.title;
+        document.getElementById('sim-desc').textContent = c.desc;
+
+        const fb = document.getElementById('sim-feedback');
+        fb.className = 'feedback-box';
+        fb.innerHTML = '';
+        document.getElementById('sim-next-btn').style.display = 'none';
+
+        const optsContainer = document.getElementById('sim-options');
+        optsContainer.innerHTML = '';
+
+        c.options.forEach((opt, idx) => {
+            const btn = document.createElement('button');
+            btn.className = 'sim-opt-btn';
+            btn.textContent = opt.text;
+            btn.onclick = () => selectSimOption(idx, btn);
+            optsContainer.appendChild(btn);
+        });
+    }
+
+    function selectSimOption(idx, btn) {
+        if (simAnswered) return;
+        simAnswered = true;
+
+        const c = simCases[currentSimIdx];
+        const buttons = document.querySelectorAll('.sim-opt-btn');
+        buttons.forEach((b, i) => {
+            b.disabled = true;
+            if (c.options[i].correct) b.classList.add('correct');
+        });
+
+        const fb = document.getElementById('sim-feedback');
+        if (c.options[idx].correct) {
+            simScore++;
+            document.getElementById('sim-score').textContent = simScore;
+            fb.className = 'feedback-box show ok';
+            fb.innerHTML = `<strong>✅ Правильно!</strong> ${c.explanation}`;
+        } else {
+            btn.classList.add('wrong');
+            fb.className = 'feedback-box show err';
+            fb.innerHTML = `<strong>❌ Не зовсім так.</strong> ${c.explanation}`;
+        }
+
+        const nextBtn = document.getElementById('sim-next-btn');
+        nextBtn.textContent = currentSimIdx < simCases.length - 1 ? 'Наступний кейс ➔' : 'Завершити симуляцію 🏁';
+        nextBtn.style.display = 'inline-block';
+    }
+
+    function nextSimCase() {
+        currentSimIdx++;
+        if (currentSimIdx < simCases.length) {
+            loadSimCase();
+        } else {
+            document.getElementById('sim-container').style.display = 'none';
+            document.getElementById('sim-finish').style.display = 'block';
+            document.getElementById('sim-final-score').textContent = `${simScore} / ${simCases.length}`;
+            let verdict = "";
+            if (simScore >= 7) verdict = "Відмінний рівень! Ви чудово розбираєтеся в ролях ІТ-команди та стратегіях застосування ШІ.";
+            else if (simScore >= 5) verdict = "Добрий результат! Ви орієнтуєтеся в базових ролях, але варто повторити нюанси трансформації професій.";
+            else verdict = "Рекомендуємо відкрити «Теоретичний довідник» та повторити матеріал обох уроків перед тестуванням.";
+            document.getElementById('sim-verdict').textContent = verdict;
+        }
+    }
+
+    function restartSim() {
+        currentSimIdx = 0;
+        simScore = 0;
+        document.getElementById('sim-score').textContent = 0;
+        document.getElementById('sim-container').style.display = 'block';
+        document.getElementById('sim-finish').style.display = 'none';
+        loadSimCase();
+    }
+
+    // --- ДАНІ ТЕСТУ (12 ЗАПИТАНЬ) ---
+    const quizQuestions = [
+        {
+            topic: "Урок 1 • ІТ-професії",
+            q: "1. Чим принципово відрізняється Product Manager (PdM) від Project Manager (PM)?",
+            options: [
+                "PdM відповідає за цінність продукту для користувачів і стратегію розвитку, а PM — за процеси, дедлайни та бюджет команди",
+                "PdM пише програмний код серверної частини, а PM тестує інтерфейс",
+                "PdM займається виключно наймом персоналу, а PM — налаштуванням серверів",
+                "Це дві однакові назви однієї посади в різних країнах"
+            ],
+            answer: 0
+        },
+        {
+            topic: "Урок 1 • ІТ-професії",
+            q: "2. Який фахівець проєктує логіку взаємодії користувача з інтерфейсом та створює прототипи (wireframes)?",
+            options: [
+                "Backend Developer",
+                "UX Designer",
+                "System Analyst",
+                "DevOps Engineer"
+            ],
+            answer: 1
+        },
+        {
+            topic: "Урок 1 • ІТ-професії",
+            q: "3. Який основний стек технологій використовує класичний Frontend Developer?",
+            options: [
+                "Python, Django, PostgreSQL, Docker",
+                "C++, Assembly, мікроконтролери ARM",
+                "HTML, CSS, JavaScript та фреймворки React / Angular / Vue.js",
+                "Swift, Objective-C, Xcode"
+            ],
+            answer: 2
+        },
+        {
+            topic: "Урок 1 • ІТ-професії",
+            q: "4. У чому полягає основна відмінність між Manual QA та Automation QA?",
+            options: [
+                "Manual QA перевіряє програму вручну за сценаріями, а Automation QA пише скрипти для автоматичної перевірки коду",
+                "Manual QA працює лише з іграми, а Automation QA — лише з мобільними банками",
+                "Manual QA виправляє помилки в коді, а Automation QA спілкується із замовником",
+                "Між ними немає жодної різниці"
+            ],
+            answer: 0
+        },
+        {
+            topic: "Урок 1 • ІТ-професії",
+            q: "5. Який грейд (рівень кваліфікації) описує самостійного спеціаліста, здатного без сторонньої допомоги вирішувати складні технічні задачі та відповідати за окремий модуль?",
+            options: [
+                "Trainee",
+                "Junior",
+                "Middle",
+                "Recruiter"
+            ],
+            answer: 2
+        },
+        {
+            topic: "Урок 1 • ІТ-професії",
+            q: "6. Хто такий Pentester у сфері кібербезпеки?",
+            options: [
+                "Фахівець, який налаштовує корпоративні принтери та Wi-Fi",
+                "Етичний хакер, який легально шукає вразливості в системі до того, як це зроблять зловмисники",
+                "Дизайнер, який створює іконки для антивірусних програм",
+                "Менеджер із продажу програмного забезпечення"
+            ],
+            answer: 1
+        },
+        {
+            topic: "Урок 2 • Штучний інтелект",
+            q: "7. Яка правильна ієрархія понять від найширшого до вужчого?",
+            options: [
+                "Deep Learning → Machine Learning → Artificial Intelligence",
+                "Artificial Intelligence → Machine Learning → Deep Learning",
+                "Machine Learning → Artificial Intelligence → Generative AI",
+                "Generative AI → Deep Learning → Artificial Intelligence"
+            ],
+            answer: 1
+        },
+        {
+            topic: "Урок 2 • Штучний інтелект",
+            q: "8. До якого типу за рівнем можливостей належать усі сучасні системи ШІ (ChatGPT, автопілоти, системи розпізнавання облич)?",
+            options: [
+                "ASI (Штучний надінтелект)",
+                "AGI (Загальний / сильний ШІ)",
+                "ANI (Вузький / слабкий ШІ)",
+                "Квантовий біоінтелект"
+            ],
+            answer: 2
+        },
+        {
+            topic: "Урок 2 • Штучний інтелект",
+            q: "9. Як називається сценарій впливу ШІ на ринок праці, коли алгоритм виступає як «другий пілот» (Copilot) і підсилює продуктивність фахівця?",
+            options: [
+                "Аугментація",
+                "Повна деіндустріалізація",
+                "Алгоритмічна упередженість",
+                "Стагнація"
+            ],
+            answer: 0
+        },
+        {
+            topic: "Урок 2 • Штучний інтелект",
+            q: "10. Що означає поняття «проблема чорної скриньки» (Black Box Problem) у глибоких нейронних мережах?",
+            options: [
+                "Нейромережа працює лише в темній темі інтерфейсу",
+                "Розробники бачать вхідні дані та результат, але не можуть точно простежити внутрішній логічний шлях, яким система дійшла висновку",
+                "Сервери ШІ зберігаються в закритих бункерах без доступу до інтернету",
+                "ШІ відмовляється відповідати на запитання користувача"
+            ],
+            answer: 1
+        },
+        {
+            topic: "Урок 2 • Штучний інтелект",
+            q: "11. Чим займається фахівець на посаді Data Annotator / AI Trainer (RLHF)?",
+            options: [
+                "Паяє мікросхеми для відеокарт",
+                "Розмічає навчальні дані та оцінює відповіді нейромереж, навчаючи моделі коректної поведінки",
+                "Ремонтує сервери в дата-центрах",
+                "Веде бухгалтерський облік ІТ-компанії"
+            ],
+            answer: 1
+        },
+        {
+            topic: "Урок 2 • Штучний інтелект",
+            q: "12. Яка з перелічених навичок належить до Human-centric skills (людиноцентричних навичок майбутнього), які неможливо повністю алгоритмізувати?",
+            options: [
+                "Швидке копіювання даних із таблиці в таблицю",
+                "Переклад типових інструкцій за словником",
+                "Критичне мислення, емоційний інтелект (EQ) та етична відповідальність за рішення",
+                "Сортування списку з мільйона чисел за зростанням"
+            ],
+            answer: 2
+        }
+    ];
+
+    function initQuiz() {
+        const form = document.getElementById('quiz-form');
+        form.innerHTML = '';
+        document.getElementById('quiz-result').classList.remove('show');
+        document.getElementById('submit-quiz-btn').style.display = 'inline-block';
+        document.getElementById('reset-quiz-btn').style.display = 'none';
+        document.getElementById('quiz-progress-bar').style.width = '0%';
+
+        quizQuestions.forEach((item, qIdx) => {
+            const qCard = document.createElement('div');
+            qCard.className = 'question-card';
+            qCard.id = `q-card-${qIdx}`;
+
+            let optionsHtml = '';
+            item.options.forEach((opt, oIdx) => {
+                optionsHtml += `
+                    <label class="radio-option" id="opt-${qIdx}-${oIdx}">
+                        <input type="radio" name="q${qIdx}" value="${oIdx}" onchange="updateQuizProgress()">
+                        <span>${opt}</span>
+                    </label>
+                `;
+            });
+
+            qCard.innerHTML = `
+                <span class="q-topic">${item.topic}</span>
+                <div class="q-title">${item.q}</div>
+                ${optionsHtml}
+            `;
+            form.appendChild(qCard);
+        });
+    }
+
+    function updateQuizProgress() {
+        let answeredCount = 0;
+        quizQuestions.forEach((_, idx) => {
+            if (document.querySelector(`input[name="q${idx}"]:checked`)) {
+                answeredCount++;
+            }
+        });
+        const pct = (answeredCount / quizQuestions.length) * 100;
+        document.getElementById('quiz-progress-bar').style.width = pct + '%';
+    }
+
+    function gradeQuiz() {
+        let unanswered = [];
+        quizQuestions.forEach((_, idx) => {
+            if (!document.querySelector(`input[name="q${idx}"]:checked`)) {
+                unanswered.push(idx + 1);
+            }
+        });
+
+        if (unanswered.length > 0) {
+            alert(`Будь ласка, дайте відповідь на всі запитання! Незаповнені питання: № ${unanswered.join(', ')}`);
+            return;
+        }
+
+        let score = 0;
+        quizQuestions.forEach((item, qIdx) => {
+            const selected = parseInt(document.querySelector(`input[name="q${qIdx}"]:checked`).value);
+            const inputs = document.querySelectorAll(`input[name="q${qIdx}"]`);
+            inputs.forEach(inp => inp.disabled = true);
+
+            const correctLabel = document.getElementById(`opt-${qIdx}-${item.answer}`);
+            correctLabel.classList.add('ans-correct');
+
+            if (selected === item.answer) {
+                score++;
+            } else {
+                const wrongLabel = document.getElementById(`opt-${qIdx}-${selected}`);
+                wrongLabel.classList.add('ans-wrong');
+            }
+        });
+
+        const resBanner = document.getElementById('quiz-result');
+        resBanner.classList.add('show');
+        document.getElementById('quiz-score-text').textContent = `${score} / 12 балів`;
+
+        let level = "";
+        if (score >= 10) level = "Високий рівень (відмінно)! Теми засвоєно бездоганно.";
+        else if (score >= 7) level = "Достатній рівень (добре)! Ви впевнено володієте матеріалом.";
+        else if (score >= 4) level = "Середній рівень. Варто ще раз переглянути теоретичний довідник.";
+        else level = "Початковий рівень. Опрацюйте теоретичний блок і спробуйте знову.";
+
+        document.getElementById('quiz-grade-text').textContent = level;
+        document.getElementById('submit-quiz-btn').style.display = 'none';
+        document.getElementById('reset-quiz-btn').style.display = 'inline-block';
+        resBanner.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Ініціалізація при завантаженні
+    loadSimCase();
+    initQuiz();
+</script>
+</body>
+</html>
